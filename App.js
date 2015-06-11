@@ -4,6 +4,12 @@ Ext.define('CustomApp', {
     componentCls: 'app',
     launch: function() {
         this._grid = null;
+        this._boxcontainer = Ext.create('Ext.form.Panel', {
+            title: 'Grid Filters',
+            layout: { type: 'hbox'},
+            width: '95%',
+            bodyPadding: 10
+        });
         this._piCombobox = this.add({
             xtype: "rallyportfolioitemtypecombobox",
             padding: 5,
@@ -28,22 +34,31 @@ Ext.define('CustomApp', {
                 scope: this
             }
         });
+        this._boxcontainer.add(this._piCombobox);
+        this._boxcontainer.add(this._checkbox);
+        this.add(this._boxcontainer);
     },
     
     _onPICombobox: function() {
         console.log("grid: ", this._grid);
-        if (this._grid) {
+        var selectedType = this._piCombobox.getRecord();
+        var model = selectedType.get('TypePath');
+        
+        if (this._grid !== null) {
             this._grid.destroy();
         }
-        
-        var selectedType = this._piCombobox.getRecord();
+        console.log("creating tree store");
         Ext.create('Rally.data.wsapi.TreeStoreBuilder').build({
-            models: selectedType.get('TypePath'),
+            models: model,
             listeners: {
                 load: function(store) {
                     var records = store.getRootNode().childNodes;
-                    console.log("records: ", records);
+                    console.log("loading");
                     this._calculateScore(records);
+                },
+                update: function(store, rec, modified, opts) {
+                    console.log("updating");
+                    this._calculateScore([rec]);
                 },
                 scope: this
             },
@@ -53,7 +68,6 @@ Ext.define('CustomApp', {
             success: this._onStoreBuilt,
             scope: this
         });
-
     },
     
     _onStoreBuilt: function(store, records) {
@@ -115,6 +129,7 @@ Ext.define('CustomApp', {
             height: this.getHeight()
         });
     },
+    
     _calculateScore: function(records)  {
         var that = this;
         Ext.Array.each(records, function(feature) {
