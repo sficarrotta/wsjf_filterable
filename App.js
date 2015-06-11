@@ -49,7 +49,7 @@ Ext.define('CustomApp', {
         }
         console.log("creating tree store");
         Ext.create('Rally.data.wsapi.TreeStoreBuilder').build({
-            models: model,
+            models: [ model ],
             listeners: {
                 load: function(store) {
                     var records = store.getRootNode().childNodes;
@@ -73,23 +73,25 @@ Ext.define('CustomApp', {
     _onStoreBuilt: function(store, records) {
         var selectedType = this._piCombobox.getRecord();
         //console.log("PI type: ", selectedType.get('TypePath'));
-        var modelNames = selectedType.get('TypePath'),
-        context = this.getContext();
+        var modelNames = selectedType.get('TypePath');
+        console.log("modelNames: ", modelNames);
+        
+        var context = this.getContext();
         this._grid = this.add({
             xtype: 'rallygridboard',
             context: context,
-            modelNames: modelNames,
+            modelNames: [ modelNames ],
             toggleState: 'grid',
             stateful: false,
             plugins: [
                 {
                     ptype: 'rallygridboardcustomfiltercontrol',
                     filterControlConfig: {
-                        modelNames: modelNames,
+                        modelNames: [ modelNames ],
                         stateful: true,
                         stateId: context.getScopedStateId('custom-filter-example')
                     }
-                }/*,
+                },
                 {
                     ptype: 'rallygridboardactionsmenu',
                     menuItems: [
@@ -105,7 +107,7 @@ Ext.define('CustomApp', {
                     buttonConfig: {
                         iconCls: 'icon-export'
                     }
-                }*/
+                }
             ],
             gridConfig: {
                 store: store,
