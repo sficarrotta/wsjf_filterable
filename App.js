@@ -89,7 +89,7 @@ Ext.define('CustomApp', {
                         stateful: true,
                         stateId: context.getScopedStateId('custom-filter-example')
                     }
-                },
+                }/*,
                 {
                     ptype: 'rallygridboardactionsmenu',
                     menuItems: [
@@ -105,7 +105,7 @@ Ext.define('CustomApp', {
                     buttonConfig: {
                         iconCls: 'icon-export'
                     }
-                }
+                }*/
             ],
             gridConfig: {
                 store: store,
