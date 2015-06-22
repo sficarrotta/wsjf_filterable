@@ -89,6 +89,7 @@ Ext.define('CustomApp', {
                     filterControlConfig: {
                         modelNames: [ modelNames ],
                         stateful: true,
+                        filterChildren: false,
                         stateId: context.getScopedStateId('custom-filter-example')
                     }
                 },
