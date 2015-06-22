@@ -86,10 +86,10 @@ Ext.define('CustomApp', {
             plugins: [
                 {
                     ptype: 'rallygridboardcustomfiltercontrol',
+                    filterChildren: false,
                     filterControlConfig: {
                         modelNames: [ modelNames ],
                         stateful: true,
-                        filterChildren: false,
                         stateId: context.getScopedStateId('custom-filter-example')
                     }
                 },
