@@ -72,7 +72,7 @@ Ext.define('CustomApp', {
                 scope: this
             },
             autoLoad: true,
-            enableHierarchy: false
+            enableHierarchy: true
         }).then({
             success: this._onStoreBuilt,
             scope: this
@@ -102,6 +102,13 @@ Ext.define('CustomApp', {
                         stateId: context.getScopedStateId('custom-filter-example')
                     }
                 },
+                /*{
+                    ptype: 'rallygridboardfieldpicker',
+                    headerPosition: 'left',
+                    modelNames: [ modelNames ],
+                    stateful: true,
+                    stateId: context.getScopedStateId('columns-example')
+                },*/
                 {
                     ptype: 'rallygridboardactionsmenu',
                     menuItems: [
@@ -122,13 +129,13 @@ Ext.define('CustomApp', {
             gridConfig: {
                 store: store,
                 columnCfgs: [
-                    {
+                    /*{
                         text: "Portfolio ID",
                         dataIndex: "FormattedID",
                         flex: 1,
                         xtype: "templatecolumn",
                         tpl: Ext.create("Rally.ui.renderer.template.FormattedIDTemplate")
-                    }, 
+                    }, */
                     'Name',
                     "TimeCriticality", "RROEValue", "UserBusinessValue", "JobSize", 
                     {
