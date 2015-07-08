@@ -93,13 +93,13 @@ Ext.define('CustomApp', {
                         stateId: context.getScopedStateId('custom-filter-example')
                     }
                 },
-                /*{
+                {
                     ptype: 'rallygridboardfieldpicker',
                     headerPosition: 'left',
                     modelNames: [ modelNames ],
                     stateful: true,
                     stateId: context.getScopedStateId('columns-example')
-                },*/
+                },
                 {
                     ptype: 'rallygridboardactionsmenu',
                     menuItems: [
